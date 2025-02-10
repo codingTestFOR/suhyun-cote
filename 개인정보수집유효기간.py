@@ -26,3 +26,26 @@ C	3 달
 오늘 날짜를 의미하는 문자열 today, 약관의 유효기간을 담은 1차원 문자열 배열 terms와 수집된 개인정보의 정보를 담은 1차원 문자열 배열 privacies가 매개변수로 주어집니다. 이때 파기해야 할 개인정보의 번호를 오름차순으로 1차원 정수 배열에 담아 return 하도록 solution 함수를 완성해 주세요.
 
 """
+
+def get_day(ymd):
+    y, m, d = map(int, ymd.split('.'))
+    return (y * 12 * 28) + (m * 28) + d  # 날짜를 일 단위로 변환
+
+def solution(today, terms, privacies):
+    answer = []
+    today_days = get_day(today)
+    
+    term_dict = {}
+    for term in terms:
+        t_type, t_months = term.split()
+        term_dict[t_type] = int(t_months) * 28  # 기간을 일 단위로 변환
+
+    for i, privacy in enumerate(privacies):
+        date, p_type = privacy.split()
+        expiry_date = get_day(date) + term_dict[p_type]  # 만료일 계산
+        
+        if expiry_date <= today_days:  # 오늘 날짜와 비교
+            answer.append(i + 1)
+
+    return answer
+
