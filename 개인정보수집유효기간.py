@@ -23,15 +23,17 @@ def solution(today, terms, privacies):
     terms_map = {}
 
     for i in terms:
-        s = i.split(" ")
+        s = i.split(" ") #공백 분리
         terms_map[s[0]] = int(s[1]) * 28 - 1
 
     t = times(today)
     for i in range(len(privacies)):
         s = privacies[i].split(" ")
-        d = times(s[0]) + terms_map[s[1]]
+        d = times(s[0]) + terms_map[s[1]] #개인정보 만료일 계산
         # print(d, t)
         if d < t:
-            answer.append(i + 1)
+            answer.append(i + 1)  # 개인정보는 1번부터 시작하므로 i+1 추가
 
-    return answe
+    return answer
+
+
