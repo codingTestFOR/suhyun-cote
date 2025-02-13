@@ -40,19 +40,6 @@ def solution(friends, gifts):
     return max(receive_count) /*다음달에 가장많이 받을 선물 개수 반환*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         -----------------------------------------------
 
 def solution(friends, gifts):
