@@ -36,8 +36,7 @@ P = list(map(int, input().split()))
 P.sort()
 
 # 누적합과 전체 합 계산
-total_time = 0  # 각 사람이 기다린 시간의 합
-current_sum = 0  # 현재까지의 누적 합
+total_time, current_sum = 0  # 각 사람이 기다린 시간의 합,  # 현재까지의 누적 합
 
 for time in P:
     current_sum += time  # 이번 사람까지 기다린 시간
