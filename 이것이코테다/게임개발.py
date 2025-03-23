@@ -5,6 +5,8 @@
 뒤가 바다면 종료.
 
 """
+
+
 n, m = map(int, input().split())
 x, y, d = map(int, input().split())
 
