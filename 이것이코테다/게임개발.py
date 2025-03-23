@@ -5,23 +5,34 @@
 뒤가 바다면 종료.
 
 """
+n, m = map(int, input().split())
+x, y, d = map(int, input().split())
 
-def max_sum_of_sequence(N, sequence):
-    sequence.sort(reverse=True)
-    result = 0
-    i = 0
-    
-    # 2 이상인 숫자들은 묶어서 곱하고, 1과 0은 각각 더해주기
-    while i < N - 1:
-        if sequence[i] > 1 and sequence[i + 1] > 1:
-            result += sequence[i] * sequence[i + 1]
-            i += 2
+map_data = [list(map(int, input().split())) for _ in range(n)]
+visited = [[0] * m for _ in range(n)]
+visited[x][y] = 1
+
+dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
+count, turn = 1, 0
+
+while True:
+    d = (d - 1) % 4
+    nx, ny = x + dx[d], y + dy[d]
+
+    if not visited[nx][ny] and not map_data[nx][ny]:
+        visited[nx][ny] = 1
+        x, y = nx, ny
+        count += 1
+        turn = 0
+        continue
+    turn += 1
+
+    if turn == 4:
+        nx, ny = x - dx[d], y - dy[d]
+        if not map_data[nx][ny]:
+            x, y = nx, ny
+            turn = 0
         else:
-            result += sequence[i]
-            i += 1
+            break
 
-    # 마지막 남은 수 처리 (1이거나 0이면 그냥 더함)
-    if i < N:
-        result += sequence[i]
-
-    return result
+print(count)
