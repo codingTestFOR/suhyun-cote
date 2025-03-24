@@ -4,14 +4,16 @@
 네 방향 모두 이동 불가면 뒤로 후진.
 뒤가 바다면 종료.
 
+방문처리/ 탐색방향 구현하기. 
+
 """
 
 
 n, m = map(int, input().split())
 x, y, d = map(int, input().split())
 
-map_data = [list(map(int, input().split())) for _ in range(n)]
-visited = [[0] * m for _ in range(n)]
+map_data = [list(map(int, input().split())) for i in range(n)]
+visited = [[0] * m for i in range(n)]
 visited[x][y] = 1
 
 dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
