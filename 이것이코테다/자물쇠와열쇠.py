@@ -50,3 +50,53 @@ key = [[0, 0, 1], [1, 1, 1], [0, 0, 0]]
 lock = [[1, 1, 1], [1, 0, 0], [1, 1, 1]]
 
 print(solution(key, lock))  # True 또는 False
+
+
+------
+def rotate_90(matrix):
+    # 90도 회전: 시계방향
+    return [list(reversed(col)) for col in zip(*matrix)]
+
+def can_unlock(key, lock):
+    key_size = len(key)
+    lock_size = len(lock)
+    expanded_size = lock_size + 2 * key_size
+
+    # 자물쇠 확장 (열쇠가 바깥까지 이동할 수 있도록)
+    expanded_lock = [[0] * expanded_size for _ in range(expanded_size)]
+
+    # 확장 자물쇠의 중앙에 원래 자물쇠 배치
+    for i in range(lock_size):
+        for j in range(lock_size):
+            expanded_lock[i + key_size][j + key_size] = lock[i][j]
+
+    # 4번 회전
+    for _ in range(4):
+        key = rotate_90(key)
+
+        # 열쇠를 이동시키며 확인
+        for x in range(0, expanded_size - key_size + 1):
+            for y in range(0, expanded_size - key_size + 1):
+
+                # 열쇠 끼워보기
+                for i in range(key_size):
+                    for j in range(key_size):
+                        expanded_lock[x + i][y + j] += key[i][j]
+
+                # 중앙 자물쇠 부분이 전부 1인지 확인 (구멍만 맞고 겹치면 안됨)
+                if is_unlocked(expanded_lock, key_size, lock_size):
+                    return True
+
+                # 다시 원상복구
+                for i in range(key_size):
+                    for j in range(key_size):
+                        expanded_lock[x + i][y + j] -= key[i][j]
+
+    return False
+
+def is_unlocked(expanded, offset, size):
+    for i in range(size):
+        for j in range(size):
+            if expanded[offset + i][offset + j] != 1:
+                return False
+    return True
