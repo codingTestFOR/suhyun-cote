@@ -6,7 +6,7 @@
 
 """
 
-def rotate_key(key):
+def rotate_key(key): 안녕
     return list(zip(*key[::-1]))
 
 def check_lock(lock, key, lock_offset):
