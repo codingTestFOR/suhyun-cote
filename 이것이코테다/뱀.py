@@ -12,7 +12,7 @@ board = [[0] * n for i in range(n)]
 k = int(input())  # 사과 개수
 for i in range(k):
     x, y = map(int, input().split())
-    board[x - 1][y - 1] = 1  # 사과는 1로 표시
+    board[x-1][y-1] = 1  #사과는 1로 표시
 
 l = int(input())  # 방향 전환 횟수
 directions = {}
@@ -21,8 +21,8 @@ for _ in range(l):
     directions[int(t)] = c
 
 # 방향: 오른쪽, 아래, 왼쪽, 위
-dx = [0, 1, 0, -1]
-dy = [1, 0, -1, 0]
+dx = [0,1,0,-1]
+dy = [1,0,-1,0]
 
 def turn(direction, c):
     if c =='L':
