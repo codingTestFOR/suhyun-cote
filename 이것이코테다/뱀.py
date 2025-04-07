@@ -1,4 +1,11 @@
-
+"""
+n x n 보드 위에 뱀이 움직인다.
+뱀은 1초마다 머리를 한 칸 이동한다.
+사과를 만나면 몸이 길어짐 (꼬리 안 줄임).
+사과가 없으면 머리 한 칸 늘고 꼬리는 줄어서 길이 유지.
+자기 몸에 부딪히거나, 벽에 부딪히면 게임 끝.
+정해진 시간에 왼쪽(L), 오른쪽(D) 으로 방향을 바꾼다.
+"""
 n = int(input())  #보드
 k = int(input())  #사과
 
@@ -11,7 +18,7 @@ for _ in range(k):
     board[x - 1][y - 1] = 1  # 문제에선 (1,1)부터 시작이라 -1 해줌
 
 # 방향 전환 정보 입력
-l = int(input())  # 예: 3 (회전 횟수)
+l = int(input())  # 회전 횟수
 directions = {}
 for _ in range(l):
     t, c = input().split()  # t: 몇 초 후, c: 방향 (L or D)
@@ -44,20 +51,19 @@ while True:
     if not (0 <= nx < n and 0 <= ny < n):
         break  # 벽 밖으로 나가면 끝
     if (nx, ny) in snake:
-        break  # 자기 몸과 부딪히면 끝
+        break  # 자기몸 부딪히면 끝
 
     # 이동: 머리 추가
     snake.append((nx, ny))
-
     if board[nx][ny] == 1:  # 사과가 있으면
-        board[nx][ny] = 0   # 사과 먹음 (0으로 바꿈)
-        # 꼬리 안 줄임 (몸이 길어짐)
+        board[nx][ny] = 0   # 사과 먹음
+        
     else:
-        snake.popleft()     # 사과 없으면 꼬리 줄임
+        snake.popleft()
 
-    x, y = nx, ny  # 머리 위치 업데이트
+    x, y = nx, ny  
 
-    if time in directions:  # 방향 전환 시간이면
+    if time in directions: 
         direction = turn(direction, directions[time])
 
-print(time)  # 몇 초에 끝났는지 출력
+print(time)
