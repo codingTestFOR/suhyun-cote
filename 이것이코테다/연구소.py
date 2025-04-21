@@ -9,7 +9,7 @@ dy = [0, 0, -1, 1]
 maximum = 0  # 결과 저장
 
 # 바이러스 확산
-def virus(temp):
+def spread_virus(temp):
     for i in range(n):
         for j in range(m):
             if temp[i][j] == 2:
@@ -32,7 +32,7 @@ def make_wall(cnt):
     global maximum
     if cnt == 3:
         temp = [row[:] for row in lab]  # deepcopy 대신 리스트 컴프리헨션!
-        spread_virus(temp)
+        spread_virus(temp)              # 이름 일치!
         maximum = max(maximum, count_safe(temp))
         return
     for i in range(n):
