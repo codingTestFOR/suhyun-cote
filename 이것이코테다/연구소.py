@@ -1,4 +1,3 @@
-
 # 입력
 n, m = map(int, input().split())
 lab = [list(map(int, input().split())) for _ in range(n)]
@@ -7,10 +6,10 @@ lab = [list(map(int, input().split())) for _ in range(n)]
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-max_safe = 0  # 결과 저장
+maximum = 0  # 결과 저장
 
 # 바이러스 확산
-def spread_virus(temp):
+def virus(temp):
     for i in range(n):
         for j in range(m):
             if temp[i][j] == 2:
@@ -28,13 +27,13 @@ def dfs_virus(temp, x, y):
 def count_safe(temp):
     return sum(row.count(0) for row in temp)
 
-# 벽 세우기 (백트래킹 방식)
+# 벽 세우기 (백트래킹)
 def make_wall(cnt):
-    global max_safe
+    global maximum
     if cnt == 3:
-        temp = copy.deepcopy(lab)
+        temp = [row[:] for row in lab]  # deepcopy 대신 리스트 컴프리헨션!
         spread_virus(temp)
-        max_safe = max(max_safe, count_safe(temp))
+        maximum = max(maximum, count_safe(temp))
         return
     for i in range(n):
         for j in range(m):
@@ -44,4 +43,4 @@ def make_wall(cnt):
                 lab[i][j] = 0
 
 make_wall(0)
-print(max_safe)
+print(maximum)
