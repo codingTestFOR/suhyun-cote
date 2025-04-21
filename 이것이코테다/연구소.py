@@ -1,6 +1,23 @@
+"""
+바이러스 확산을 막기 위해 벽을 세움. 벽의 개수는 3개 세움
+
+input                 output
+7 7                       27
+2 0 0 0 1 1 0              벽을 적절히 3개 세우고, 바이러스를 퍼뜨린 후,안전한 칸(0)이 최대로 남은 개수는 27칸
+0 0 1 0 1 2 0
+0 1 1 0 1 0 0
+0 1 0 0 0 0 0
+0 0 0 0 0 1 1
+0 1 0 0 0 0 0
+0 1 0 0 0 0 0
+
+0빈칸, 1 벽 , 2 바이러스
+"""
+
+
 # 입력
 n, m = map(int, input().split())
-lab = [list(map(int, input().split())) for _ in range(n)]
+lab = [list(map(int, input().split())) for i in range(n)]
 
 # 방향 벡터
 dx = [-1, 1, 0, 0]
