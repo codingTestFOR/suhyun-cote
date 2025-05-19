@@ -48,7 +48,7 @@ def get_smallest_node():
             index = i
     return index
 
-# 다익스트라 시작
+# 다익스트라 코드 
 def dijkstra(start):
     distance[start] = 0
     visited[start] = True
