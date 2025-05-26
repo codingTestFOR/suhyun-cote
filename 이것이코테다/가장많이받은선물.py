@@ -1,9 +1,9 @@
-/*다음달에 누가 가장 많은 선물을 받을까? */
+
 
 def solution(friends, gifts):
     from collections import defaultdict
 
-    n = len(friends) /*  n=친구 수 */
+    n = len(friends)
     idx_map = {name: i for i, name in enumerate(friends)}   /* 딕셔너리 친구이름을 숫자로 바꿔주는 딕셔너리 0,1,2*/
 
     # 1. 선물 기록 저장 (이중 리스트)
@@ -15,16 +15,15 @@ def solution(friends, gifts):
         gift_count[giver_idx][receiver_idx] += 1
 
     # 2. 선물 지수
-    gift_index = [0] * n   /* 내가 선물 준 개수 - 내가 받은 선물개수 */
-    for i in range(n):
+    gift_index = [0] * n  
         given = sum(gift_count[i])
         received = sum(gift_count[j][i] for j in range(n))
         gift_index[i] = given - received
 
     
-    receive_count = [0] * n  /* 다음달 선물 받을 개수는  선물지수가 높은 사람이 추가선물받음.   */
+    receive_count = [0] * n  
 
-    for i in range(n):  /* 가장큰 숫자 찾기.  */
+    for i in range(n):  
         for j in range(i + 1, n):
             if gift_count[i][j] > gift_count[j][i]:
                 receive_count[i] += 1
@@ -37,10 +36,10 @@ def solution(friends, gifts):
                     receive_count[j] += 1
 
     # 4. 가장 많이 받는 사람 찾기
-    return max(receive_count) /*다음달에 가장많이 받을 선물 개수 반환*/
+    return max(receive_count)
 
 
-        -----------------------------------------------
+
 
 def solution(friends, gifts):
     f = {v: i for i, v in enumerate(friends)}
